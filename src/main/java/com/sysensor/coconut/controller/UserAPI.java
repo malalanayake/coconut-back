@@ -5,6 +5,7 @@ import com.sysensor.coconut.entity.User;
 import com.sysensor.coconut.repository.BaseRepository;
 import com.sysensor.coconut.service.BaseService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(URLConfig.USER)
-public class UserAPI{
+public class UserAPI {
 
     BaseService<User, BaseRepository<User>> userService;
 
@@ -21,12 +22,14 @@ public class UserAPI{
     }
 
     @RequestMapping("/getAll")
-    public List<User> getUsers() {
+    @ResponseBody
+    List<User> getAllUsers() {
         return userService.getAll();
     }
 
     @RequestMapping("/add")
-    public User create() throws Exception {
+    @ResponseBody
+    User create() throws Exception {
         User user = new User();
         user.setContextDate(LocalDate.now());
         user.setUserName("test");
